@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="833b6dcd-5e64-4dcd-acb0-2ff14adf1101">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="penyewaan_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     alatlap.`id` AS alatlap_id,
+     alatlap.`nama` AS alatlap_nama,
+     alatlap.`jenis` AS alatlap_jenis,
+     alatlap.`hargaperjam` AS alatlap_hargaperjam,
+     alatlap.`stok` AS alatlap_stok,
+     pelunasan1.`norental` AS pelunasan1_norental,
+     pelunasan1.`tglbayar` AS pelunasan1_tglbayar,
+     pelunasan1.`uangpelunasan` AS pelunasan1_uangpelunasan,
+     pelunasan1.`uangkembali` AS pelunasan1_uangkembali,
+     pelunasan2.`qty` AS pelunasan2_qty,
+     pelunasan2.`penyewaan_item_id` AS pelunasan2_penyewaan_item_id,
+     pelunasan2.`penyewaan_id` AS pelunasan2_penyewaan_id,
+     penyewa.`team` AS penyewa_team,
+     penyewa.`manager` AS penyewa_manager,
+     penyewa.`nohp` AS penyewa_nohp,
+     penyewaan.`tglrental` AS penyewaan_tglrental,
+     penyewaan.`tglmain` AS penyewaan_tglmain,
+     penyewaan.`status` AS penyewaan_status,
+     penyewaan.`jammasuk` AS penyewaan_jammasuk,
+     penyewaan.`jamkeluar` AS penyewaan_jamkeluar,
+     penyewaan.`totalbayar` AS penyewaan_totalbayar,
+     penyewaan.`uangmuka` AS penyewaan_uangmuka,
+     penyewaan.`sisabayar` AS penyewaan_sisabayar,
+     penyewaan.`noboking` AS penyewaan_noboking,
+     penyewaan_item.`jumlahjam` AS penyewaan_item_jumlahjam,
+     penyewaan_item.`qty` AS penyewaan_item_qty,
+     penyewaan_item.`subtotal` AS penyewaan_item_subtotal,
+     kasir.`nama` AS kasir_nama
+FROM
+     `kasir` kasir INNER JOIN `pelunasan1` pelunasan1 ON kasir.`id` = pelunasan1.`kasir_id`
+     INNER JOIN `pelunasan2` pelunasan2 ON pelunasan1.`id` = pelunasan2.`pelunasan1_id`
+     INNER JOIN `penyewaan` penyewaan ON pelunasan1.`penyewaan_id` = penyewaan.`id`
+     AND penyewaan.`id` = pelunasan2.`penyewaan_id`
+     AND kasir.`id` = penyewaan.`kasir_id`
+     INNER JOIN `penyewa` penyewa ON penyewaan.`penyewa_id` = penyewa.`id`
+     INNER JOIN `penyewaan_item` penyewaan_item ON penyewaan.`id` = penyewaan_item.`penyewaan_id`
+     AND penyewaan_item.`id` = pelunasan2.`penyewaan_item_id`
+     INNER JOIN `alatlap` alatlap ON penyewaan_item.`alatlap_id` = alatlap.`id`
+     AND alatlap.`id` = pelunasan2.`alatlap_id`]]>
+	</queryString>
+	<field name="alatlap_id" class="java.lang.Integer"/>
+	<field name="alatlap_nama" class="java.lang.String"/>
+	<field name="alatlap_jenis" class="java.lang.String"/>
+	<field name="alatlap_hargaperjam" class="java.lang.Double"/>
+	<field name="alatlap_stok" class="java.lang.Integer"/>
+	<field name="kasir_id" class="java.lang.Integer"/>
+	<field name="kasir_nama" class="java.lang.String"/>
+	<field name="kasir_username" class="java.lang.String"/>
+	<field name="kasir_password" class="java.lang.String"/>
+	<field name="pelunasan1_id" class="java.lang.Integer"/>
+	<field name="pelunasan1_norental" class="java.lang.String"/>
+	<field name="pelunasan1_tglbayar" class="java.sql.Date"/>
+	<field name="pelunasan1_uangpelunasan" class="java.lang.Double"/>
+	<field name="pelunasan1_uangkembali" class="java.lang.Double"/>
+	<field name="pelunasan1_penyewaan_id" class="java.lang.Integer"/>
+	<field name="pelunasan1_kasir_id" class="java.lang.Integer"/>
+	<field name="pelunasan2_id" class="java.lang.Integer"/>
+	<field name="pelunasan2_qty" class="java.lang.Integer"/>
+	<field name="pelunasan2_alatlap_id" class="java.lang.Integer"/>
+	<field name="pelunasan2_penyewaan_item_id" class="java.lang.Integer"/>
+	<field name="pelunasan2_penyewaan_id" class="java.lang.Integer"/>
+	<field name="pelunasan2_pelunasan1_id" class="java.lang.Integer"/>
+	<field name="penyewa_id" class="java.lang.Integer"/>
+	<field name="penyewa_team" class="java.lang.String"/>
+	<field name="penyewa_manager" class="java.lang.String"/>
+	<field name="penyewa_nohp" class="java.lang.String"/>
+	<field name="penyewaan_id" class="java.lang.Integer"/>
+	<field name="penyewaan_tglrental" class="java.sql.Date"/>
+	<field name="penyewaan_tglmain" class="java.lang.String"/>
+	<field name="penyewaan_status" class="java.lang.String"/>
+	<field name="penyewaan_jammasuk" class="java.lang.String"/>
+	<field name="penyewaan_jamkeluar" class="java.lang.String"/>
+	<field name="penyewaan_totalbayar" class="java.lang.Double"/>
+	<field name="penyewaan_uangmuka" class="java.lang.Double"/>
+	<field name="penyewaan_sisabayar" class="java.lang.Double"/>
+	<field name="penyewaan_kasir_id" class="java.lang.Integer"/>
+	<field name="penyewaan_noboking" class="java.lang.String"/>
+	<field name="penyewaan_penyewa_id" class="java.lang.Integer"/>
+	<field name="penyewaan_item_id" class="java.lang.Integer"/>
+	<field name="penyewaan_item_jumlahjam" class="java.lang.Integer"/>
+	<field name="penyewaan_item_qty" class="java.lang.Integer"/>
+	<field name="penyewaan_item_penyewaan_id" class="java.lang.Integer"/>
+	<field name="penyewaan_item_subtotal" class="java.lang.Double"/>
+	<field name="penyewaan_item_alatlap_id" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="105" splitType="Stretch">
+			<image>
+				<reportElement x="-21" y="-23" width="843" height="125" uuid="eaa9807c-e350-4c0c-9cdb-67fb613595ee"/>
+				<imageExpression><![CDATA["E:\\Semester 4\\oprek3-Penyewaan_Lap_Futsal_ORMLite\\src\\gambar\\headerNOTE.gif"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="128" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="114" y="0" width="114" height="20" uuid="8dda0f71-f93c-400e-ae86-2936c5e468c0"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<text><![CDATA[Nama barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="228" y="0" width="114" height="20" uuid="3aa232e4-92ec-4727-85fb-9186a89b9fea"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="114" height="20" uuid="e81830ed-4174-4bab-bcfd-656f6f1c8531"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="342" y="0" width="114" height="20" uuid="78198a9b-8cca-4128-9457-1f244750875e"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<text><![CDATA[Subtotal]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="342" y="0" width="114" height="20" uuid="5d9fcda0-7a0e-4624-840a-e4818a8b0c0a"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{penyewaan_item_subtotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="114" y="0" width="114" height="20" uuid="9e37afd8-296d-4bc7-a373-8a06e72af963"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{alatlap_nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="228" y="0" width="114" height="20" uuid="cf9aa982-57aa-4057-a0aa-c25c3c03aa46"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{penyewaan_item_qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="114" height="20" uuid="8abb677d-dd5e-496a-b78c-4d14ae52a2b6"/>
+				<textFieldExpression><![CDATA[$F{penyewaan_item_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="112" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="65" splitType="Stretch">
+			<staticText>
+				<reportElement x="228" y="0" width="114" height="20" uuid="f1f53c2b-3a9d-4a85-8e7a-7a4c3be90fe7"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<text><![CDATA[penyewaan_totalbayar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="228" y="20" width="114" height="20" uuid="abee886f-8294-4687-a1d1-26db6f32884b"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<text><![CDATA[penyewaan_sisabayar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="228" y="40" width="114" height="20" uuid="760c8e94-351c-45a2-8efe-e706432d8686"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<text><![CDATA[penyewaan_uangmuka]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="342" y="0" width="114" height="20" uuid="82d39b9c-2209-49eb-bd65-a34d431a76e6"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{penyewaan_totalbayar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="342" y="20" width="114" height="20" uuid="2ee79e48-0e8b-44f1-bbdd-f615d309b8fb"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{penyewaan_sisabayar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="342" y="40" width="114" height="20" uuid="baf638fc-49bd-4820-ba40-128f73fdd052"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{penyewaan_uangmuka}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
